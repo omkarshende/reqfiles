@@ -1,0 +1,23 @@
+# For CharlesX
+# Add cantera
+source /home/ihme/pavang/numLibs_CX/cantera/bin/setup_cantera
+###
+# For CharlesX
+module load boost/1.55
+module load cmake/3.9.2
+module load parmetis/4.0.3
+module load hdf5/1.8.13
+# SCons
+export PATH=${HOME}/numLibs_CX/scons/bin/:$PATH
+export PARMETISHOME=/opt/ohpc/pub/thirdparty/libs/parmetis/4.0.3-intel-18.1
+export HDF5_ROOT=/opt/ohpc/pub/thirdparty/libs/hdf5/1.8.13-intel-18.1
+export BOOST_ROOT=${HOME}/numLibs_CX/boost
+export CharlesX_Data_ROOT=${HOME}/CharlesX/CharlesX_Data
+export CANTERA_ROOT=${HOME}/numLibs_CX/cantera
+export EIGEN3_ROOT=${HOME}/numLibs_CX/eigen
+export ROWPLUS_ROOT=${HOME}/numLibs_CX/ROWPlus
+export SUNDIALS_ROOT=${HOME}/numLibs_CX/sundials
+
+# Set sundials library path (dynamic)
+export LD_LIBRARY_PATH=${HOME}/numLibs_CX/sundials/lib:$LD_LIBRARY_PATH
+###

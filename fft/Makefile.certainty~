@@ -1,0 +1,38 @@
+# Makefile for SGI O2/R10000
+
+SHELL = /bin/sh
+.IGNORE:
+
+# System-specific settings
+
+F77 =		mpif77
+F77FLAGS =	-O -w
+CC =		mpicc
+CCFLAGS =	-O -DFFT_FFTW -mkl -I/home/frankel1/TOOLS/FFTW_2.1.5/include
+LINK =		ar
+LINKFLAGS =	rvs
+#LINK =		mpif77
+#LINKFLAGS =	-L/home/frankel1/TOOLS/FFTW_2.1.5/lib      
+USRLIB= /home/frankel1/TOOLS/FFTW_2.1.5/lib/libfftw.a
+SYSLIB= /home/frankel1/TOOLS/FFTW_2.1.5/lib/libfftw_mpi.a
+SIZE =		size
+
+# Link rule
+
+$(EXE):	$(OBJ)
+	$(LINK) $(LINKFLAGS) libfft.a $(OBJ)
+#	$(LINK) $(LINKFLAGS) $(OBJ) $(USRLIB) $(SYSLIB) -o $(EXE)
+
+# Compilation rules
+
+.f.o:
+	@cp $< $*.F
+	$(F77) $(F77FLAGS) -c $*.F
+	@rm $*.F
+
+.c.o:
+	$(CC) $(CCFLAGS) -c $<
+
+# Individual dependencies
+
+$(OBJ):	$(INC)
